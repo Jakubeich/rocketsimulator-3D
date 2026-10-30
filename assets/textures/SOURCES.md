@@ -1,0 +1,6 @@
+# Planetární textury
+
+- `earth_blue_marble_200407.jpg`: NASA Earth Observatory, **Blue Marble: Next Generation**, červenec 2004, topografie a batymetrie, 5400 × 2700. Reto Stöckli, NASA Goddard Space Flight Center; data MODIS Terra a další výšková data. [Zdrojový soubor NASA](https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73751/world.topo.bathy.200407.3x5400x2700.jpg), [popis projektu Blue Marble](https://science.nasa.gov/earth/earth-observatory/the-blue-marble-true-color-global-imagery-at-1km-resolution/).
+- `earth_clouds_nasa_2002.jpg`: NASA Goddard Space Flight Center, **Blue Marble: Clouds**, 2048 × 1024. Reto Stöckli, další úpravy Robert Simmon. [Zdrojový soubor NASA](https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_2048.jpg), [popis snímků a jejich autorů](https://science.nasa.gov/earth/earth-observatory/the-blue-marble-true-color-global-imagery-at-1km-resolution/).
+
+Textury jsou historické kompozity, nikoli aktuální počasí ani detailní podklady pro 3D terén. Globus je jen obrazem pozadí; lokální krajina a dosedací pláň jsou stylizované. [Pravidla NASA pro použití obrazových podkladů](https://www.nasa.gov/nasa-brand-center/images-and-media/) stanovují podmínky pro užití NASA materiálů, včetně zákazu naznačovat podporu nebo schválení NASA.

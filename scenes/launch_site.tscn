@@ -1,0 +1,113 @@
+[gd_scene format=3 uid="uid://bo15uuk0he08"]
+
+[ext_resource type="PackedScene" uid="uid://bd2nb0avyfr3x" path="res://assets/models/Pobrezi_a_teren.glb" id="1_coast"]
+[ext_resource type="PackedScene" uid="uid://dvbfcs2rhlxy1" path="res://assets/models/LC39A_Rampa.glb" id="2_pad"]
+[ext_resource type="PackedScene" uid="uid://ytvbplq8jp30" path="res://assets/models/Falcon_9_Crew_Dragon.glb" id="3_falcon"]
+[ext_resource type="PackedScene" uid="uid://bbsbvdatw8f0v" path="res://assets/models/Pristavaci_plocha_LZ1.glb" id="4_lz"]
+[ext_resource type="Script" uid="uid://dk5k2ywlyf7k6" path="res://scripts/launch_camera.gd" id="5_camera"]
+[ext_resource type="Script" uid="uid://brfw7dua2d01" path="res://scripts/rocket_flight.gd" id="6_flight"]
+[ext_resource type="Script" uid="uid://bu6wv7ic5fjps" path="res://scripts/engine_effects.gd" id="7_effects"]
+[ext_resource type="Script" uid="uid://b5nq5iqrq4j03" path="res://scripts/flight_hud.gd" id="8_hud"]
+[ext_resource type="Script" uid="uid://xojwfehd6q2w" path="res://scripts/launch_smoke.gd" id="9_smoke"]
+[ext_resource type="Script" uid="uid://el7t3deswgrg" path="res://scripts/landing_legs.gd" id="10_legs"]
+[ext_resource type="Script" uid="uid://dj4i5h1hcckwe" path="res://scripts/launch_site.gd" id="11_launch_site"]
+[ext_resource type="Script" uid="uid://cjs12cmieo6n0" path="res://scripts/flight_sky.gd" id="12_yfjcm"]
+[ext_resource type="PackedScene" uid="uid://nx58llgs6ruh" path="res://assets/models/Hvezdy_pozadi.glb" id="13_ytwjn"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMaterial"]
+sky_top_color = Color(0.16, 0.38, 0.66, 1)
+sky_horizon_color = Color(0.72, 0.82, 0.91, 1)
+ground_bottom_color = Color(0.15, 0.19, 0.15, 1)
+ground_horizon_color = Color(0.64, 0.73, 0.74, 1)
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMaterial")
+
+[sub_resource type="Environment" id="Environment"]
+background_mode = 2
+sky = SubResource("Sky")
+ambient_light_source = 3
+ambient_light_energy = 0.7
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.72, 0.8, 0.86, 1)
+fog_density = 0.0001
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ow17q"]
+albedo_color = Color(0.4614, 0.5271, 0.3811, 1)
+roughness = 0.7
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bt80l"]
+material = SubResource("StandardMaterial3D_ow17q")
+size = Vector2(200000, 200000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ukqe4"]
+albedo_color = Color(0.1718, 0.3811, 0.4845, 1)
+metallic = 0.25
+roughness = 0.28
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_maajb"]
+material = SubResource("StandardMaterial3D_ukqe4")
+size = Vector2(200000, 100000)
+
+[node name="LaunchSite" type="Node3D" unique_id=1859840652]
+script = ExtResource("11_launch_site")
+
+[node name="Environment" type="WorldEnvironment" parent="." unique_id=1211021068]
+environment = SubResource("Environment")
+
+[node name="Sun" type="DirectionalLight3D" parent="." unique_id=2077751057]
+transform = Transform3D(0.79863554, 0.46769807, -0.37873447, 0, 0.62932044, 0.7771459, 0.601815, -0.6206564, 0.5025977, 0, 0, 0)
+light_color = Color(1, 0.94, 0.83, 1)
+light_energy = 1.2
+shadow_enabled = true
+directional_shadow_max_distance = 420.0
+
+[node name="Coast" parent="." unique_id=920148434 instance=ExtResource("1_coast")]
+
+[node name="LaunchPad" parent="." unique_id=731799706 instance=ExtResource("2_pad")]
+
+[node name="Falcon9_CrewDragon" parent="." unique_id=359788283 instance=ExtResource("3_falcon")]
+script = ExtResource("6_flight")
+
+[node name="EngineEffects" type="Node3D" parent="Falcon9_CrewDragon" unique_id=1220841717]
+script = ExtResource("7_effects")
+
+[node name="LandingLegs" type="Node3D" parent="Falcon9_CrewDragon" unique_id=1719756566]
+script = ExtResource("10_legs")
+
+[node name="LaunchSmoke" type="Node3D" parent="." unique_id=923493755]
+script = ExtResource("9_smoke")
+
+[node name="LandingZone" parent="." unique_id=667306389 instance=ExtResource("4_lz")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2000, -6, 0)
+
+[node name="InspectionCamera" type="Node3D" parent="." unique_id=103412723]
+script = ExtResource("5_camera")
+
+[node name="Camera3D" type="Camera3D" parent="InspectionCamera" unique_id=653094665]
+transform = Transform3D(0.5816831, 0.16160072, -0.7972014, 0, 0.9800666, 0.19866933, 0.8134155, -0.11556259, 0.57008815, -143.5, 76.76, 102.6)
+current = true
+fov = 38.0
+far = 500000.0
+
+[node name="FlightHUD" type="CanvasLayer" parent="." unique_id=1335561137]
+script = ExtResource("8_hud")
+
+[node name="FlightSky" type="Node3D" parent="." unique_id=566937417]
+script = ExtResource("12_yfjcm")
+
+[node name="DistantLand" type="MeshInstance3D" parent="." unique_id=536740429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.5, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_bt80l")
+
+[node name="DistantOcean" type="MeshInstance3D" parent="." unique_id=1728347729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.2, 50500)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_maajb")
+
+[node name="Stars" parent="." unique_id=2135049350 instance=ExtResource("13_ytwjn")]
+transform = Transform3D(70, 0, 0, 0, 70, 0, 0, 0, 70, 0, 0, 0)
+visible = false
